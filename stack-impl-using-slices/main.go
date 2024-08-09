@@ -16,16 +16,24 @@ type Stack struct {
 }
 
 func (s *Stack) Push(ele int) {
+	s.sMux.Lock()
 	s.stackArr = append(s.stackArr, ele)
+	s.sMux.Unlock()
 }
 
 func (s *Stack) Pop() {
+	s.sMux.Lock()
+	defer s.sMux.Unlock()
+	if len(s.stackArr) <= 0 {
+		fmt.Println("Underflow")
+	}
 	tempArr := s.stackArr[:len(s.stackArr)-1]
 	s.stackArr = tempArr
-
 }
 
 func (s *Stack) Peek() int {
+	s.sMux.Lock()
+	defer s.sMux.Unlock()
 	return s.stackArr[len(s.stackArr)-1]
 }
 
