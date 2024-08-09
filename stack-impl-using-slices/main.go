@@ -26,6 +26,7 @@ func (s *Stack) Pop() {
 	defer s.sMux.Unlock()
 	if len(s.stackArr) <= 0 {
 		fmt.Println("Underflow")
+		return
 	}
 	tempArr := s.stackArr[:len(s.stackArr)-1]
 	s.stackArr = tempArr
@@ -38,7 +39,7 @@ func (s *Stack) Peek() int {
 }
 
 func main() {
-	// example to test out functionality
+	// example 1 to test out functionality
 	s := Stack{}
 	s.Push(3)
 	fmt.Println(s.stackArr)
@@ -49,4 +50,7 @@ func main() {
 	s.Pop()
 	fmt.Println("Elements inside stack: ", s.stackArr)
 	fmt.Println("Element at top: ", s.Peek())
+	// example 2 to test out functionality
+	// s := Stack{}
+	// s.Pop()
 }
